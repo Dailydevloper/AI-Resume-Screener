@@ -1,0 +1,287 @@
+{% extends "base.html" %} {% block content %}
+<div class="container py-5">
+  <div class="row">
+    <div class="col-lg-8 mx-auto">
+      <div class="card shadow-lg">
+        <div class="card-body p-5">
+          <h1 class="card-title text-center mb-4">
+            <i class="fas fa-robot text-primary"></i> Resume Screener
+          </h1>
+          <p class="text-center text-muted mb-5">
+            Upload a resume and job description to get an AI-powered match score
+            and feedback.
+          </p>
+
+          <form id="screeningForm" enctype="multipart/form-data">
+            <!-- Resume Upload -->
+            <div class="mb-4">
+              <label for="resumeFile" class="form-label fw-bold">
+                <i class="fas fa-file-pdf text-danger"></i> Upload Resume
+              </label>
+              <div class="input-group">
+                <input
+                  type="file"
+                  class="form-control"
+                  id="resumeFile"
+                  name="resume"
+                  accept=".pdf,.docx,.txt"
+                  required
+                />
+                <span class="input-group-text">PDF, DOCX, or TXT</span>
+              </div>
+              <small class="text-muted d-block mt-2">
+                Max 50MB. Supported: PDF, DOCX, TXT
+              </small>
+            </div>
+
+            <!-- Job Description Input -->
+            <div class="mb-4">
+              <label for="jdText" class="form-label fw-bold">
+                <i class="fas fa-briefcase text-info"></i> Job Description
+              </label>
+              <textarea
+                class="form-control"
+                id="jdText"
+                name="jd_text"
+                rows="8"
+                placeholder="Paste the full job description here..."
+                required
+              ></textarea>
+              <small class="text-muted d-block mt-2">
+                Include key responsibilities, required skills, and
+                qualifications.
+              </small>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="d-grid gap-2">
+              <button
+                type="submit"
+                class="btn btn-primary btn-lg"
+                id="submitBtn"
+              >
+                <i class="fas fa-play"></i> Screen Resume
+              </button>
+            </div>
+          </form>
+
+          <!-- Loading Indicator -->
+          <div id="loadingIndicator" class="mt-4" style="display: none">
+            <div class="text-center">
+              <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              <p class="text-muted mt-2">
+                Analyzing resume and job description...
+              </p>
+            </div>
+          </div>
+
+          <!-- Error Alert -->
+          <div
+            id="errorAlert"
+            class="alert alert-danger mt-4"
+            style="display: none"
+            role="alert"
+          >
+            <i class="fas fa-exclamation-circle"></i>
+            <strong>Error:</strong>
+            <span id="errorMessage"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Features Section -->
+      <div class="row mt-5">
+        <div class="col-md-4 mb-3">
+          <div class="feature-card text-center">
+            <i class="fas fa-file-extract fa-2x text-primary mb-2"></i>
+            <h5>PDF Extraction</h5>
+            <p class="text-muted small">
+              Automatically extract text from PDF, DOCX, and TXT files
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="feature-card text-center">
+            <i class="fas fa-brain fa-2x text-success mb-2"></i>
+            <h5>NLP Analysis</h5>
+            <p class="text-muted small">
+              Advanced skill extraction using NLTK and SpaCy
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="feature-card text-center">
+            <i class="fas fa-chart-bar fa-2x text-info mb-2"></i>
+            <h5>Scoring & Feedback</h5>
+            <p class="text-muted small">
+              Get detailed match scores and personalized feedback
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="resultsContainer"></div>
+{% endblock %} {% block extra_js %}
+<script>
+  document
+    .getElementById("screeningForm")
+    .addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(this);
+      const submitBtn = document.getElementById("submitBtn");
+      const loadingIndicator = document.getElementById("loadingIndicator");
+      const errorAlert = document.getElementById("errorAlert");
+
+      // Hide error and show loading
+      errorAlert.style.display = "none";
+      loadingIndicator.style.display = "block";
+      submitBtn.disabled = true;
+
+      try {
+        const response = await fetch("/api/screen", {
+          method: "POST",
+          body: formData,
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || "An error occurred");
+        }
+
+        // Display results
+        displayResults(data);
+        loadingIndicator.style.display = "none";
+      } catch (error) {
+        console.error("Error:", error);
+        document.getElementById("errorMessage").textContent = error.message;
+        errorAlert.style.display = "block";
+        loadingIndicator.style.display = "none";
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+
+  function displayResults(data) {
+    const resultsContainer = document.getElementById("resultsContainer");
+
+    const html = `
+          <div class="container py-5">
+              <div class="row">
+                  <div class="col-lg-8 mx-auto">
+                      <div class="card shadow-lg mb-4">
+                          <div class="card-header bg-success text-white">
+                              <h5 class="mb-0"><i class="fas fa-check-circle"></i> Screening Results</h5>
+                          </div>
+                          <div class="card-body">
+                              <div class="row mb-4">
+                                  <div class="col-md-4 text-center">
+                                      <div class="score-circle" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                          <div class="score-value">${data.final_score.toFixed(1)}</div>
+                                          <div class="score-label">Overall Score</div>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-4 text-center">
+                                      <div class="score-circle" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                          <div class="score-value">${data.similarity_score.toFixed(1)}</div>
+                                          <div class="score-label">Similarity</div>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-4 text-center">
+                                      <div class="score-circle" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                                          <div class="score-value">${data.skill_match_score.toFixed(1)}</div>
+                                          <div class="score-label">Skill Match</div>
+                                      </div>
+                                  </div>
+                              </div>
+
+                              <div class="rating mb-3 text-center">
+                                  <span class="fs-4">${data.rating}</span>
+                                  <p class="text-muted">${getRatingDescription(data.final_score)}</p>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="card shadow-lg mb-4">
+                          <div class="card-header bg-info text-white">
+                              <h5 class="mb-0"><i class="fas fa-list"></i> Candidate Information</h5>
+                          </div>
+                          <div class="card-body">
+                              ${data.candidate_info.name ? `<p><strong>Name:</strong> ${data.candidate_info.name}</p>` : ""}
+                              ${data.candidate_info.email ? `<p><strong>Email:</strong> ${data.candidate_info.email}</p>` : ""}
+                              ${data.candidate_info.phone ? `<p><strong>Phone:</strong> ${data.candidate_info.phone}</p>` : ""}
+                          </div>
+                      </div>
+
+                      <div class="card shadow-lg mb-4">
+                          <div class="card-header bg-warning text-dark">
+                              <h5 class="mb-0"><i class="fas fa-comments"></i> Feedback & Analysis</h5>
+                          </div>
+                          <div class="card-body">
+                              <pre class="feedback-text">${data.feedback}</pre>
+                          </div>
+                      </div>
+
+                      <div class="card shadow-lg mb-4">
+                          <div class="card-header bg-secondary text-white">
+                              <h5 class="mb-0"><i class="fas fa-tools"></i> Skills Analysis</h5>
+                          </div>
+                          <div class="card-body">
+                              <div class="row">
+                                  <div class="col-md-6">
+                                      <h6 class="text-success">✓ Matched Skills (${data.skill_details.matched.length})</h6>
+                                      <div class="skills-tags">
+                                          ${data.skill_details.matched
+                                            .slice(0, 10)
+                                            .map(
+                                              (skill) =>
+                                                `<span class="badge bg-success">${skill}</span>`,
+                                            )
+                                            .join("")}
+                                          ${data.skill_details.matched.length > 10 ? `<span class="badge bg-success">+${data.skill_details.matched.length - 10} more</span>` : ""}
+                                      </div>
+                                  </div>
+                                  <div class="col-md-6">
+                                      <h6 class="text-danger">✗ Missing Skills (${data.skill_details.missing.length})</h6>
+                                      <div class="skills-tags">
+                                          ${data.skill_details.missing
+                                            .slice(0, 10)
+                                            .map(
+                                              (skill) =>
+                                                `<span class="badge bg-danger">${skill}</span>`,
+                                            )
+                                            .join("")}
+                                          ${data.skill_details.missing.length > 10 ? `<span class="badge bg-danger">+${data.skill_details.missing.length - 10} more</span>` : ""}
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="d-grid gap-2 mb-4">
+                          <button class="btn btn-primary" onclick="location.href='/'">
+                              <i class="fas fa-sync"></i> Screen Another Resume
+                          </button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      `;
+
+    resultsContainer.innerHTML = html;
+  }
+
+  function getRatingDescription(score) {
+    if (score >= 80) return "Excellent match! Highly recommended.";
+    if (score >= 60) return "Good match. Worth reviewing.";
+    if (score >= 40) return "Partial match. Consider additional reviews.";
+    return "Limited match. Look for better candidates.";
+  }
+</script>
+{% endblock %}

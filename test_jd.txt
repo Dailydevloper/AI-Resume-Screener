@@ -1,0 +1,38 @@
+Senior Backend Engineer - Mid-Sized Tech Company
+
+About the Role:
+We are seeking a Senior Backend Engineer to join our growing engineering team. You will be responsible for designing and maintaining scalable backend systems that serve millions of users.
+
+Key Responsibilities:
+- Design and implement backend services using Python frameworks
+- Work with cloud platforms (AWS, Azure, or GCP)
+- Manage relational and NoSQL databases
+- Implement containerization and orchestration
+- Lead code reviews and mentor junior engineers
+- Collaborate on architectural decisions
+- Optimize API performance and security
+
+Required Skills:
+- 5+ years of backend development experience
+- Strong proficiency in Python
+- Experience with web frameworks (Django, FastAPI, or Flask)
+- Relational database experience (PostgreSQL, MySQL)
+- Cloud platform experience (AWS preferred)
+- Docker and container technologies
+- Git and version control
+- RESTful API design
+
+Preferred Skills:
+- Kubernetes experience
+- Microservices architecture
+- NoSQL databases (MongoDB, Redis)
+- CI/CD pipeline implementation
+- GraphQL experience
+- Linux/Unix administration
+- Agile and Scrum methodology
+
+Benefits:
+- Competitive salary and equity
+- Remote-friendly work
+- Professional development budget
+- Health insurance and retirement plans

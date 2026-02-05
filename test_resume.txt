@@ -1,0 +1,46 @@
+John Smith
+john.smith@email.com
+(555) 123-4567
+
+SENIOR PYTHON DEVELOPER
+
+Professional Summary:
+Senior Backend Engineer with 7+ years of experience in building scalable web applications using modern Python frameworks. Expertise in cloud technologies and microservices architecture.
+
+Technical Skills:
+- Python, JavaScript, TypeScript
+- Django, FastAPI, Flask
+- PostgreSQL, MongoDB, Redis
+- AWS (EC2, S3, Lambda, RDS)
+- Docker, Kubernetes, CI/CD
+- Git, GitHub, GitLab
+- RESTful APIs, GraphQL
+- Agile/Scrum
+- Linux/Unix
+
+Experience:
+
+Senior Backend Engineer | TechCorp Inc. | 2020-Present
+- Architected microservices using FastAPI and Django
+- Managed AWS infrastructure with CloudFormation
+- Led Redis implementation for caching layer
+- Implemented CI/CD pipelines with GitHub Actions
+- Mentored junior developers
+
+Backend Engineer | WebSolutions LLC | 2018-2020
+- Developed APIs using Flask and PostgreSQL
+- Containerized services with Docker
+- Managed Kubernetes deployments
+- Automated testing and deployment
+
+Junior Developer | StartupXYZ | 2016-2018
+- Built full-stack applications with Django
+- Contributed to MongoDB schema design
+- Version control with Git
+
+Education:
+B.S. Computer Science | State University | 2016
+
+Certifications:
+- AWS Solutions Architect Associate
+- Docker Certified Associate
