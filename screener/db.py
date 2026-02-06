@@ -3,6 +3,7 @@ Database module for persisting screening results.
 Uses SQLite for lightweight data storage.
 """
 
+import os
 import sqlite3
 import json
 import logging
@@ -11,7 +12,9 @@ from typing import List, Dict, Optional
 
 logger = logging.getLogger(__name__)
 
-DB_PATH = Path(__file__).parent.parent / "data" / "screener.db"
+# Support custom database path from environment variable (for Render)
+default_db_path = Path(__file__).parent.parent / "data" / "screener.db"
+DB_PATH = Path(os.getenv('DATABASE_PATH', str(default_db_path)))
 
 
 def init_db(db_path: str = None) -> None:

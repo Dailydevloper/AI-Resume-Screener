@@ -22,14 +22,25 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+# Get environment
+FLASK_ENV = os.getenv('FLASK_ENV', 'development')
+IS_PRODUCTION = FLASK_ENV == 'production'
+
 # Flask app configuration
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024  # 50MB max file size
 app.config['UPLOAD_FOLDER'] = Path(__file__).parent / 'uploads'
 app.config['ALLOWED_EXTENSIONS'] = {'pdf', 'docx', 'txt'}
 
+# Secret key for session management (use environment variable in production)
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev-secret-key-change-in-production')
+
 # Create upload folder if it doesn't exist
 app.config['UPLOAD_FOLDER'].mkdir(exist_ok=True)
+
+# Ensure data directory exists
+data_dir = Path(__file__).parent / 'data'
+data_dir.mkdir(exist_ok=True)
 
 # Initialize database
 init_db()
@@ -201,5 +212,7 @@ def internal_error(error):
 
 
 if __name__ == '__main__':
-    # Run in debug mode (set to False in production)
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    # Run in debug mode locally (production uses gunicorn)
+    port = int(os.getenv('PORT', 5000))
+    debug = not IS_PRODUCTION
+    app.run(debug=debug, host='0.0.0.0', port=port)

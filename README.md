@@ -21,16 +21,16 @@ This project automates the screening process by applying NLP techniques to evalu
 
 ## 🛠️ Tech Stack
 
-| Category        | Tools                           |
-| --------------- | ------------------------------- |
-| Language        | Python                          |
-| ML/NLP          | Scikit-learn, NLTK, SpaCy       |
-| Backend         | Flask                           |
-| Data Processing | Pandas, NumPy                   |
-| Parsing         | PyPDF2, pdfplumber, python-docx |
-| Frontend        | HTML, CSS, Bootstrap            |
-| Testing         | Pytest                          |
-| Version Control | Git, GitHub                     |
+| Category        | Tools                            |
+| --------------- | -------------------------------- |
+| Language        | Python                           |
+| ML/NLP          | Scikit-learn, NLTK               |
+| Backend         | Flask, Gunicorn                  |
+| Parsing         | PyPDF2, python-docx              |
+| Frontend        | HTML, CSS, Bootstrap, JavaScript |
+| Testing         | Pytest                           |
+| Version Control | Git, GitHub                      |
+| Deployment      | Render (PaaS)                    |
 
 ## 🏗️ System Architecture
 
@@ -89,7 +89,7 @@ Example:
    python app.py
    ```
 
-   Open in browser: http://127.0.0.1:5000
+   Open in browser: <http://127.0.0.1:5000>
 
 ## 🧪 Running Tests
 
@@ -148,17 +148,25 @@ AI-Resume-Screener/
 └── test_resume.txt
 ```
 
-## 🌐 Deployment (Optional)
+## 🌐 Deployment
 
-This project can be deployed on:
+This project is ready to deploy on Render.
 
-- Render
-- Railway
-- Hugging Face Spaces
+### Quick Deploy to Render
 
-After deployment, add your live demo link here:
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com)
 
-Demo: https://your-app-link.onrender.com
+1. Fork or clone this repository
+2. Sign up for a free account at [Render](https://render.com)
+3. Create a new Web Service and connect your repository
+4. Render will automatically detect `render.yaml` and configure everything
+5. Your app will be live at `https://your-app-name.onrender.com`
+
+**For detailed deployment instructions, see [DEPLOYMENT.md](DEPLOYMENT.md)**
+
+### Live Demo
+
+Demo: _Add your Render URL here after deployment_
 
 ## ⚠️ Limitations
 
@@ -181,7 +189,7 @@ Prateek Dwivedi
 
 B.Tech Student | AI and Machine Learning Enthusiast
 
-GitHub: https://github.com/Dailydevloper
+GitHub: <https://github.com/Dailydevloper>
 
 ## 📜 License
 
