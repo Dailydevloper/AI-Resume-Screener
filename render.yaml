@@ -2,16 +2,19 @@ services:
   - type: web
     name: ai-resume-screener
     env: python
-    pythonVersion: 3.11
-    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT --workers 2 --timeout 120
+    plan: free
+    runtime: python3.10
+
     buildCommand: |
+      pip install --upgrade pip
       pip install -r requirements.txt
-      python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords'); nltk.download('punkt_tab')"
+      python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords')"
       mkdir -p data uploads
+
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT --workers 2 --timeout 120
+
     envVars:
       - key: FLASK_ENV
         value: production
       - key: PYTHONUNBUFFERED
         value: "1"
-      - key: DATABASE_PATH
-        value: /opt/render/project/src/data/screener.db
