@@ -1,302 +1,188 @@
-# 🤖 AI-Powered Resume Screener (ATS Lite)
+# 📄 AI Resume Screener — NLP-Based Resume Matching System
 
-An intelligent resume screening system that analyzes resumes against job descriptions using Natural Language Processing (NLP) and machine learning. Perfect for HR professionals, recruiters, and tech teams looking for an automated, beginner-friendly ATS solution.
+An AI-powered web application that analyzes resumes and matches them with job descriptions using Natural Language Processing (NLP) and Machine Learning techniques.
 
-## ✨ Features
+This system helps recruiters and job seekers quickly evaluate resume relevance, identify skill gaps, and improve hiring efficiency.
 
-✅ **PDF/DOCX/TXT Support** - Extract text from multiple document formats  
-✅ **Intelligent Skill Matching** - Identify technical and soft skills automatically  
-✅ **TF-IDF Scoring** - Advanced text similarity analysis  
-✅ **Candidate Profiling** - Extract name, email, and phone from resumes  
-✅ **Detailed Feedback** - Get actionable insights on each screening  
-✅ **Screening History** - Persistent storage of all screenings  
-✅ **Bootstrap UI** - Clean, responsive, mobile-friendly interface  
-✅ **Industry-Ready** - Mimics real ATS systems used by Fortune 500 companies
+## 🚀 Features
+
+- 📂 Upload resumes in PDF, DOCX, or TXT format
+- 🧠 Automatic text extraction and preprocessing
+- 📊 Resume–Job Description similarity scoring using TF-IDF + Cosine Similarity
+- ✅ Skill extraction and missing skill detection
+- 🌐 User-friendly Flask web interface
+- 🧪 Unit-tested components for reliability
+
+## 🧩 Problem Statement
+
+Manual resume screening is time-consuming and error-prone. Recruiters often spend hours reviewing resumes that do not match job requirements.
+
+This project automates the screening process by applying NLP techniques to evaluate resume relevance and provide actionable feedback.
 
 ## 🛠️ Tech Stack
 
-- **Backend:** Flask, Python 3.14+
-- **NLP:** NLTK, SpaCy
-- **ML:** Scikit-learn (TF-IDF), NumPy, Pandas
-- **File Processing:** PyPDF2, pdfplumber, python-docx
-- **Database:** SQLite
-- **Frontend:** HTML5, CSS3, Bootstrap 5, JavaScript
-- **Data Viz:** Matplotlib, Seaborn, Chart.js
-- **Deployment:** Render, Gunicorn
+| Category        | Tools                           |
+| --------------- | ------------------------------- |
+| Language        | Python                          |
+| ML/NLP          | Scikit-learn, NLTK, SpaCy       |
+| Backend         | Flask                           |
+| Data Processing | Pandas, NumPy                   |
+| Parsing         | PyPDF2, pdfplumber, python-docx |
+| Frontend        | HTML, CSS, Bootstrap            |
+| Testing         | Pytest                          |
+| Version Control | Git, GitHub                     |
 
-## 📋 Quick Start
+## 🏗️ System Architecture
 
-### Prerequisites
+User Upload → Text Extraction → Preprocessing → TF-IDF Vectorization → Similarity Calculation → Skill Analysis → Result Display
 
-- Python 3.8+
-- pip or conda
+## 📊 Scoring Methodology
 
-### Installation
+The final resume score is calculated using a weighted combination:
 
-1. **Clone the repository:**
+Final Score = 0.5 × Text Similarity + 0.5 × Skill Match Score
+
+Components:
+
+- Text Similarity: Cosine similarity between resume and job description vectors
+- Skill Match: Percentage of required skills found in the resume
+
+## 📷 Screenshots (Add Here)
+
+Upload screenshots in a /screenshots folder and link them here.
+
+- /screenshots/upload.png
+- /screenshots/result.png
+
+Example:
+
+- Resume Upload Page
+- Result and Analysis Page
+
+## 📦 Installation and Setup
+
+1. Clone the Repository
 
    ```bash
    git clone https://github.com/Dailydevloper/AI-Resume-Screener.git
    cd AI-Resume-Screener
    ```
 
-2. **Create a virtual environment:**
+2. Create Virtual Environment (Recommended)
 
    ```bash
-   # Windows
-   python -m venv .venv
-   .venv\Scripts\activate
-
-   # macOS/Linux
-   python -m venv .venv
-   source .venv/bin/activate
+   python -m venv venv
+   source venv/bin/activate
+   # On Windows:
+   venv\Scripts\activate
    ```
 
-3. **Install dependencies:**
+3. Install Dependencies
 
    ```bash
    pip install -r requirements.txt
    ```
 
-4. **Download NLTK data (first time only):**
-
-   ```bash
-   python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords')"
-   ```
-
-5. **Run the application:**
+4. Run the Application
 
    ```bash
    python app.py
    ```
 
-   The app will start at: **<http://localhost:5000>**
+   Open in browser: http://127.0.0.1:5000
 
-## 🚀 Usage
+## 🧪 Running Tests
 
-1. **Open the home page** (<http://localhost:5000>)
-2. **Upload a resume** (PDF, DOCX, or TXT)
-3. **Paste a job description** in the text area
-4. **Click "Screen Resume"** to analyze
-5. **View results** including:
-   - Overall match score (0-100)
-   - Similarity percentage
-   - Skill match coverage
-   - Matched/missing skills
-   - Personalized feedback
-6. **Check history** to review past screenings
+To run unit tests:
 
-## 📊 How Scoring Works
+```bash
+pytest
+```
 
-### Final Score = (Similarity × 0.5) + (Skill Match × 0.5)
+Tests validate text extraction, scoring logic, and API responses.
 
-- **Similarity Score (50%):** TF-IDF cosine similarity between resume and job description
-- **Skill Match Score (50%):** Ratio of matched skills to required skills
-- **Final Score Range:** 0-100
+## 📈 Example Output
 
-### Rating Scale
+Resume Match Score: 78%
 
-- ⭐⭐⭐⭐⭐ (80-100): Excellent match
-- ⭐⭐⭐⭐ (60-79): Good match
-- ⭐⭐⭐ (40-59): Partial match
-- ⭐⭐ (20-39): Limited match
-- ⭐ (0-19): Poor match
+Matched Skills:
 
-## 📁 Project Structure
+- Python
+- Machine Learning
+- Pandas
+
+Missing Skills:
+
+- Docker
+- Cloud Deployment
+- SQL
+
+Recommendation: Add deployment and database projects to improve profile.
+
+## 📂 Project Structure
 
 ```text
 AI-Resume-Screener/
-├── app.py                      # Flask entry point
-├── requirements.txt            # Python dependencies
+├── app.py
+├── README.md
+├── render.yaml
+├── templates/
+│   ├── base.html
+│   ├── history.html
+│   └── index.html
+├── static/
+│   ├── main.js
+│   └── styles.css
 ├── screener/
 │   ├── __init__.py
-│   ├── parsing.py             # PDF/DOCX extraction
-│   ├── nlp.py                 # NLP & skill extraction
-│   ├── scoring.py             # Scoring & matching
-│   └── db.py                  # Database operations
-├── templates/
-│   ├── base.html              # Base template
-│   ├── index.html             # Upload page
-│   ├── results.html           # Results page
-│   └── history.html           # History page
-├── static/
-│   ├── styles.css             # Custom styling
-│   └── main.js                # Frontend scripts
-├── data/
-│   ├── skills.json            # Skills taxonomy
-│   └── screener.db            # SQLite database (auto-created)
-├── uploads/                   # Uploaded resume files
-└── README.md                  # This file
+│   ├── db.py
+│   ├── nlp.py
+│   ├── parsing.py
+│   └── scoring.py
+├── uploads/
+│   ├── 20260205_223727_test_resume.txt
+│   └── 20260205_224738_Profile.pdf
+├── requirements.txt
+├── test_app.py
+├── test_jd.txt
+└── test_resume.txt
 ```
 
-## 🧠 Skills Taxonomy
+## 🌐 Deployment (Optional)
 
-The system includes a comprehensive skills taxonomy covering:
+This project can be deployed on:
 
-- **Programming Languages:** Python, Java, JavaScript, C++, Go, Rust, etc.
-- **Web Frameworks:** Django, Flask, FastAPI, React, Angular, Vue, etc.
-- **Databases:** SQL, MySQL, PostgreSQL, MongoDB, Redis, Cassandra, etc.
-- **Cloud Platforms:** AWS, Azure, GCP, Kubernetes, Docker, etc.
-- **Data Science:** Pandas, NumPy, Scikit-learn, TensorFlow, PyTorch, R, Spark, etc.
-- **DevOps Tools:** Git, GitHub, Jenkins, CI/CD, Terraform, Ansible, etc.
-- **Soft Skills:** Agile, Scrum, Leadership, Communication, Project Management, etc.
+- Render
+- Railway
+- Hugging Face Spaces
 
-Customize `data/skills.json` to add more skills or adjust categories.
+After deployment, add your live demo link here:
 
-## 🔧 Configuration
+Demo: https://your-app-link.onrender.com
 
-### Environment Variables (Optional)
+## ⚠️ Limitations
 
-Create a `.env` file in the root directory:
+- Does not use deep contextual embeddings (e.g., BERT)
+- Performance depends on resume formatting
+- Limited to predefined skill sets
+- No multilingual support currently
 
-```env
-FLASK_ENV=production
-DEBUG=False
-MAX_UPLOADS=50
-```
+## 🔮 Future Enhancements
 
-### Database
-
-The SQLite database is automatically created in `data/screener.db` on first run.
-
-**Schema:**
-
-- `screenings` - Stores screening results
-- `candidates` - Stores candidate information
-
-## 🧪 Testing
-
-### Manual Testing (Recommended MVP approach)
-
-1. **Test with sample resume:**
-   - Create a simple text resume with common skills
-   - Upload a PDF version
-   - Compare extraction accuracy
-
-2. **Test edge cases:**
-   - Empty PDF
-   - Very long resume (10+ pages)
-   - Multi-format file uploads
-
-3. **Verify scoring:**
-   - Perfect match: resume text = job description
-   - Partial match: 60-70% skill overlap
-   - Poor match: completely different skills
-
-### Sample Data
-
-Example resume text:
-
-```text
-John Doe
-john.doe@email.com
-(555) 123-4567
-
-Senior Python Developer with 5+ years experience
-- Strong experience with Django and FastAPI
-- MongoDB and PostgreSQL databases
-- AWS and Docker deployment
-- Git version control
-```
-
-Example job description:
-
-```text
-Seeking Senior Backend Engineer
-Required Skills:
-- Python programming
-- Django or Flask framework
-- Relational database (SQL, PostgreSQL)
-- AWS or cloud experience
-- Docker containerization
-- RESTful API design
-```
-
-Expected: **High match score (~85)**
-
-## 📊 Data Visualization (Future Enhancement)
-
-The app is set up for Chart.js integration. Future versions will include:
-
-- Score distribution charts
-- Skill match heatmaps
-- Candidate comparison graphs
-- Trending common skills
-
-## 🚀 Deployment
-
-### Deploy to Render
-
-1. **Push to GitHub:**
-
-   ```bash
-   git push origin main
-   ```
-
-2. **Connect to Render:**
-   - Go to <https://render.com>
-   - Create new Web Service
-   - Connect GitHub repository
-   - Use `gunicorn app:app` as start command
-   - Set environment to Python 3.14
-
-3. **The app will auto-deploy on every push to main**
-
-### Deploy to Heroku
-
-```bash
-heroku login
-heroku create your-app-name
-git push heroku main
-```
-
-### Deploy to AWS/GCP
-
-See individual provider documentation or use their CLI tools.
-
-## 🤝 Contributing
-
-Contributions welcome! Ideas:
-
-- Add more NLP models (Word2Vec, BERT)
-- Implement batch resume screening
-- Add resume parsing for specific fields
-- Create admin dashboard
-- Add API authentication
-- Multi-language support
-
-## 📝 License
-
-MIT License - Feel free to use, modify, and distribute.
+- Integration of BERT / Transformer models
+- Skill weighting based on job role
+- Resume ranking dashboard
+- User authentication system
+- Cloud-based storage
 
 ## 👨‍💻 Author
 
-**Dailydevloper** - Building AI-powered HR solutions
+Prateek Dwivedi
 
-## 📧 Support
+B.Tech Student | AI and Machine Learning Enthusiast
 
-- Report bugs on GitHub Issues
-- Suggest features via Discussions
-- Star ⭐ if you found this helpful!
+GitHub: https://github.com/Dailydevloper
 
-## 📚 Learning Resources
+## 📜 License
 
-- [Flask Documentation](https://flask.palletsprojects.com/)
-- [NLTK Book](https://www.nltk.org/book/)
-- [Scikit-learn Guide](https://scikit-learn.org/stable/)
-- [Natural Language Processing with SpaCy](https://spacy.io/)
-
-## 🎯 Roadmap
-
-- [ ] Advanced NLP models (BERT, RoBERTa)
-- [ ] Batch resume screening
-- [ ] Resume comparison/ranking
-- [ ] Admin analytics dashboard
-- [ ] API for third-party integrations
-- [ ] Mobile app
-- [ ] Multi-language support
-- [ ] Resume parsing templates
-
----
-
-## Build smarter hiring workflows with AI! 🚀
+This project is licensed under the MIT License.
