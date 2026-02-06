@@ -1,6 +1,6 @@
 # 📄 AI Resume Screener — NLP-Based Resume Matching System
 
-An AI-powered web application that analyzes resumes and matches them with job descriptions using Natural Language Processing (NLP) and Machine Learning techniques.
+An AI-powered web application that analyses resumes and matches them with job descriptions using Natural Language Processing (NLP) and Machine Learning techniques.
 
 This system helps recruiters and job seekers quickly evaluate resume relevance, identify skill gaps, and improve hiring efficiency.
 
@@ -49,15 +49,12 @@ Components:
 
 ## 📷 Screenshots (Add Here)
 
-Upload screenshots in a /screenshots folder and link them here.
+<img width="1920" height="1032" alt="Screenshot 2026-02-06 171824" src="https://github.com/user-attachments/assets/9eca07f6-ddf9-4284-a087-4fb13124fd83" />
 
-- /screenshots/upload.png
-- /screenshots/result.png
+<img width="1920" height="1032" alt="Screenshot 2026-02-06 171932" src="https://github.com/user-attachments/assets/4acf73a2-2b44-4619-b81a-605a4b390973" />
 
-Example:
+<img width="1920" height="1032" alt="Screenshot 2026-02-06 171953" src="https://github.com/user-attachments/assets/b16dfc45-f9e3-4d72-ba3a-8222d397127d" />
 
-- Resume Upload Page
-- Result and Analysis Page
 
 ## 📦 Installation and Setup
 
@@ -117,7 +114,7 @@ Missing Skills:
 - Cloud Deployment
 - SQL
 
-Recommendation: Add deployment and database projects to improve profile.
+Recommendation: Add deployment and database projects to improve the profile.
 
 ## 📂 Project Structure
 
@@ -148,25 +145,10 @@ AI-Resume-Screener/
 └── test_resume.txt
 ```
 
-## 🌐 Deployment
-
-This project is ready to deploy on Render.
-
-### Quick Deploy to Render
-
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com)
-
-1. Fork or clone this repository
-2. Sign up for a free account at [Render](https://render.com)
-3. Create a new Web Service and connect your repository
-4. Render will automatically detect `render.yaml` and configure everything
-5. Your app will be live at `https://your-app-name.onrender.com`
-
-**For detailed deployment instructions, see [DEPLOYMENT.md](DEPLOYMENT.md)**
 
 ### Live Demo
 
-Demo: _Add your Render URL here after deployment_
+Demo: https://ai-resume-screener-atif.onrender.com
 
 ## ⚠️ Limitations
 
